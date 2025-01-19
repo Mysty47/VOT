@@ -1,0 +1,30 @@
+# File Management System with Docker Compose, MinIO, and Keycloak
+
+This project is a file management system that allows users to upload, download, update, and delete files using a REST API. The system leverages Docker Compose to run MinIO for S3 storage, Keycloak for authentication with JWT tokens, and a Python Flask application for the API.
+
+---
+
+## Table of Contents
+
+1. [Project Overview](#project-overview)
+2. [Technologies Used](#technologies-used)
+3. [Features](#features)
+4. [Setup Instructions](#setup-instructions)
+5. [Keycloak Configuration](#keycloak-configuration)
+6. [API Endpoints](#api-endpoints)
+7. [Usage Examples](#usage-examples)
+8. [Project Structure](#project-structure)
+9. [License](#license)
+
+---
+
+## How to run the project
+
+docker-compose up
+
+## Setup Instructions
+
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/Mysty47/VOT.git
+   cd file-management-system
