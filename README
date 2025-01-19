@@ -1,30 +1,92 @@
 # File Management System with Docker Compose, MinIO, and Keycloak
 
-This project is a file management system that allows users to upload, download, update, and delete files using a REST API. The system leverages Docker Compose to run MinIO for S3 storage, Keycloak for authentication with JWT tokens, and a Python Flask application for the API.
+This project is a **file management system** that allows users to **upload, download, update**, and **delete files** using a REST API. The system uses **Docker Compose** to run **MinIO** for S3-compatible storage, **Keycloak** for **authentication** using **JWT tokens**, and a **Python Flask** application to provide the API.
 
 ---
 
 ## Table of Contents
 
-1. [Project Overview](#project-overview)
-2. [Technologies Used](#technologies-used)
-3. [Features](#features)
-4. [Setup Instructions](#setup-instructions)
-5. [Keycloak Configuration](#keycloak-configuration)
-6. [API Endpoints](#api-endpoints)
-7. [Usage Examples](#usage-examples)
-8. [Project Structure](#project-structure)
-9. [License](#license)
+- [Project Overview](#project-overview)
+- [Technologies Used](#technologies-used)
+- [Features](#features)
+- [Setup Instructions](#setup-instructions)
+- [Keycloak Configuration](#keycloak-configuration)
+- [API Endpoints](#api-endpoints)
+- [Usage Examples](#usage-examples)
+- [Project Structure](#project-structure)
+- [License](#license)
 
 ---
 
-## How to run the project
+## Project Overview
 
+This project provides a **secure file management system** that ensures users can only interact with files after proper authentication via **Keycloak**. The system supports the following operations:
+
+- **Upload** files to MinIO S3 storage.
+- **Download** files by unique identifier.
+- **Update** existing files by their identifier.
+- **Delete** files securely.
+
+---
+
+## Technologies Used
+
+- **Docker Compose**: To orchestrate the services (MinIO, Keycloak, Flask).
+- **MinIO**: Local, S3-compatible storage for file handling.
+- **Keycloak**: Identity and Access Management (IAM) for JWT-based authentication.
+- **Flask** (Python): Backend REST API implementation.
+- **Boto3**: Python SDK for interacting with MinIO as an S3 service.
+
+---
+
+## Features
+
+- **Secure Authentication**: Using JWT tokens through Keycloak for access control.
+- **RESTful API**: Provide endpoints for file management (upload, download, update, delete).
+- **Modular Architecture**: Easy to configure and scale.
+- **Logging & Error Handling**: Robust error handling and logging for better debugging.
+
+---
+
+## How to Run the Project
+
+docker-compose up --build
+
+```bash
 docker-compose up
 
-## Setup Instructions
+#Services
 
-1. **Clone the Repository**
-   ```bash
-   git clone https://github.com/Mysty47/VOT.git
-   cd file-management-system
+MinIO Console: http://localhost:9001
+Username: minioadmin
+Password: minioadmin
+
+Keycloak Admin Console: http://localhost:8080
+Username: admin
+Password: admin
+
+File Management API: http://localhost:5000
+
+#Usage Examples
+1. Upload a File
+bash
+
+curl -X POST -H "Authorization: Bearer <JWT_TOKEN>" \
+     -F "file=@example.txt" \
+     http://localhost:5000/upload
+
+2. Download a File
+
+curl -X GET -H "Authorization: Bearer <JWT_TOKEN>" \
+     http://localhost:5000/download/<file_id> --output example.txt
+
+3. Update a File
+
+curl -X PUT -H "Authorization: Bearer <JWT_TOKEN>" \
+     -F "file=@new_example.txt" \
+     http://localhost:5000/update/<file_id>
+     
+4. Delete a File
+
+curl -X DELETE -H "Authorization: Bearer <JWT_TOKEN>" \
+     http://localhost:5000/delete/<file_id>
