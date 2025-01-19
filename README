@@ -2,22 +2,6 @@
 
 This project is a **file management system** that allows users to **upload, download, update**, and **delete files** using a REST API. The system uses **Docker Compose** to run **MinIO** for S3-compatible storage, **Keycloak** for **authentication** using **JWT tokens**, and a **Python Flask** application to provide the API.
 
----
-
-## Table of Contents
-
-- [Project Overview](#project-overview)
-- [Technologies Used](#technologies-used)
-- [Features](#features)
-- [Setup Instructions](#setup-instructions)
-- [Keycloak Configuration](#keycloak-configuration)
-- [API Endpoints](#api-endpoints)
-- [Usage Examples](#usage-examples)
-- [Project Structure](#project-structure)
-- [License](#license)
-
----
-
 ## Project Overview
 
 This project provides a **secure file management system** that ensures users can only interact with files after proper authentication via **Keycloak**. The system supports the following operations:
@@ -85,7 +69,7 @@ curl -X GET -H "Authorization: Bearer <JWT_TOKEN>" \
 curl -X PUT -H "Authorization: Bearer <JWT_TOKEN>" \
      -F "file=@new_example.txt" \
      http://localhost:5000/update/<file_id>
-     
+
 4. Delete a File
 
 curl -X DELETE -H "Authorization: Bearer <JWT_TOKEN>" \
