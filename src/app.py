@@ -26,7 +26,6 @@ s3_client = boto3.client(
 
 
 def verify_jwt(token):
-    """Валидира JWT токен с публичния ключ на Keycloak."""
     try:
         decoded = jwt.decode(token, KEYCLOAK_PUBLIC_KEY, algorithms=["RS256"])
         return decoded
@@ -36,7 +35,6 @@ def verify_jwt(token):
 
 @app.route("/upload", methods=["POST"])
 def upload_file():
-    """Качване на файл в MinIO."""
     token = request.headers.get("Authorization", "").replace("Bearer ", "")
     if not verify_jwt(token):
         return jsonify({"error": "Unauthorized"}), 401
@@ -51,7 +49,6 @@ def upload_file():
 
 @app.route("/download/<file_id>", methods=["GET"])
 def download_file(file_id):
-    """Сваляне на файл от MinIO."""
     token = request.headers.get("Authorization", "").replace("Bearer ", "")
     if not verify_jwt(token):
         return jsonify({"error": "Unauthorized"}), 401
@@ -70,7 +67,6 @@ def download_file(file_id):
 
 @app.route("/update/<file_id>", methods=["PUT"])
 def update_file(file_id):
-    """Обновяване на съществуващ файл в MinIO."""
     token = request.headers.get("Authorization", "").replace("Bearer ", "")
     if not verify_jwt(token):
         return jsonify({"error": "Unauthorized"}), 401
@@ -86,7 +82,6 @@ def update_file(file_id):
 
 @app.route("/delete/<file_id>", methods=["DELETE"])
 def delete_file(file_id):
-    """Изтриване на файл в MinIO."""
     token = request.headers.get("Authorization", "").replace("Bearer ", "")
     if not verify_jwt(token):
         return jsonify({"error": "Unauthorized"}), 401
